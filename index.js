@@ -1,3 +1,4 @@
+const request = require('request');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const {prefix, token} = require('./config.json');
@@ -28,7 +29,7 @@ client.on('message', message => {
 
       const args = message.content.slice(prefix.length).split(/ +/);
       const command = args.shift().toLowerCase();
-    if (message.content.startsWith(`${prefix}kick`)) {
+    if (command === "kick") {
       const member = message.mentions.members.first()
       if(message.member.hasPermission(['BAN_MEMBERS', 'KICK_MEMBERS'])){
         if (!member) {
@@ -47,6 +48,27 @@ client.on('message', message => {
       if(!message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])){
         return message.reply("You have an inferior role to do this, peasant.")
       }
+    }
+    if(command === "meme"){
+      request('https://meme-api.herokuapp.com/gimme', function(error, response, body){
+        if(!error){
+          var parsedData = JSON.parse(body);
+          var memeImg = parsedData["url"];
+          message.channel.send(memeImg);
+        };
+
+      });
+    
+    };
+    if(command === "cursed"){
+      request('https://meme-api.herokuapp.com/gimme/cursedimages', function(error, response, body){
+        if(!error){
+          var parsedData = JSON.parse(body);
+          var cursedImg = parsedData["url"];
+          message.channel.send(cursedImg);
+        }
+      })
+      
     }
   })
 
