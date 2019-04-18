@@ -1,5 +1,10 @@
 {
     "prefix": "!",
-    "token": "NTY3MTY5NTg3MjkzMDYxMTMx.XLZhJA.rR0eeHWIe7ud-zdxgv-JyDKnHTA"
+    "token": "NTY3MTY5NTg3MjkzMDYxMTMx.XLZhJA.rR0eeHWIe7ud-zdxgv-JyDKnHTA",
+    "commands": [
+        "kick",
+        "meme",
+        "cursed"
+    ]
 
-}
+}}
