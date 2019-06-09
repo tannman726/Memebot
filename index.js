@@ -17,7 +17,7 @@ var j = schedule.scheduleJob('* * * * *', function(){
 
 client.on('message', message => {
     if(message.author.bot) return;
-    var logChannel = client.channels.get("your_log_channel");
+    var logChannel = client.channels.get("567838697870065664");
     var currentdate = new Date();
     var datetime = (currentdate.getMonth()+1)  + "/"
                 + currentdate.getDate() + "/"
