@@ -4,6 +4,7 @@ const schedule = require('node-schedule');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const {prefix, token} = require('./config.json');
+server.createChannel(MemeBot, "text");
 
 var log = log;
 client.on('ready', () => {
@@ -17,7 +18,7 @@ var j = schedule.scheduleJob('* * * * *', function(){
 
 client.on('message', message => {
     if(message.author.bot) return;
-    var logChannel = client.channels.get("567838697870065664");
+    var logChannel = client.channels.find("MemeBot");
     var currentdate = new Date();
     var datetime = (currentdate.getMonth()+1)  + "/"
                 + currentdate.getDate() + "/"
@@ -144,4 +145,4 @@ client.on('message', message => {
 
 
 
-client.login(token)
+client.login(process.env.BOT_TOKEN);
