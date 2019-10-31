@@ -17,89 +17,101 @@ for (const file of commandFiles) {
 }
 var imageArray = [];
 var ranImage;
+var today = new Date();
+let time;
+let timeSet = '18:35';
+setInterval(function() {
+	today = new Date();
+	time = today.getHours() + ':' + today.getMinutes();
+	console.log(time);
+	return time;
+}, 30000);
 
-rp('https://www.reddit.com/r/memes/top.json?limit=100')
-	.then((body) => {
-		var parsedData = JSON.parse(body);
-		parsedData.data.children.forEach((imageUrl) => {
-			var imageCreator = imageUrl.data.url;
-			imageArray.push(imageCreator);
-		});
-	})
-	.catch((err) => {
-		console.log('Error!', err);
-	});
-rp('https://www.reddit.com/r/memes/rising.json?limit=100')
-	.then((body) => {
-		var parsedData = JSON.parse(body);
-		parsedData.data.children.forEach((imageUrl) => {
-			var imageCreator = imageUrl.data.url;
-			imageArray.push(imageCreator);
-		});
-	})
-	.catch((err) => {
-		console.log('Error!', err);
-	});
-rp('https://www.reddit.com/r/memes/new.json?limit=100')
-	.then((body) => {
-		var parsedData = JSON.parse(body);
-		parsedData.data.children.forEach((imageUrl) => {
-			var imageCreator = imageUrl.data.url;
-			imageArray.push(imageCreator);
-		});
-	})
-	.catch((err) => {
-		console.log('Error!', err);
-	});
-rp('https://www.reddit.com/r/dankmemes/rising.json?limit=100')
-	.then((body) => {
-		var parsedData = JSON.parse(body);
-		parsedData.data.children.forEach((imageUrl) => {
-			var imageCreator = imageUrl.data.url;
-			imageArray.push(imageCreator);
-		});
-	})
-	.catch((err) => {
-		console.log('Error!', err);
-	});
-rp('https://www.reddit.com/r/dankmemes/top.json?limit=100')
-	.then((body) => {
-		var parsedData = JSON.parse(body);
-		parsedData.data.children.forEach((imageUrl) => {
-			var imageCreator = imageUrl.data.url;
-			imageArray.push(imageCreator);
-		});
-	})
-	.catch((err) => {
-		console.log('Error!', err);
-	});
-rp('https://www.reddit.com/r/dankmemes/new.json?limit=100')
-	.then((body) => {
-		var parsedData = JSON.parse(body);
-		parsedData.data.children.forEach((imageUrl) => {
-			var imageCreator = imageUrl.data.url;
-			imageArray.push(imageCreator);
-		});
-	})
-	.catch((err) => {
-		console.log('Error!', err);
-	});
-rp('https://www.reddit.com/r/wholesomememes/rising.json?limit=100')
-	.then((body) => {
-		var parsedData = JSON.parse(body);
-		parsedData.data.children.forEach((imageUrl) => {
-			var imageCreator = imageUrl.data.url;
-			imageArray.push(imageCreator);
-		});
-	})
-	.catch((err) => {
-		console.log('Error!', err);
-	});
+setInterval(function() {
+	if (time == timeSet) {
+		rp('https://www.reddit.com/r/memes/top.json?limit=100')
+			.then((body) => {
+				var parsedData = JSON.parse(body);
+				parsedData.data.children.forEach((imageUrl) => {
+					var imageCreator = imageUrl.data.url;
+					imageArray.push(imageCreator);
+				});
+			})
+			.catch((err) => {
+				console.log('Error!', err);
+			});
+		rp('https://www.reddit.com/r/memes/rising.json?limit=100')
+			.then((body) => {
+				var parsedData = JSON.parse(body);
+				parsedData.data.children.forEach((imageUrl) => {
+					var imageCreator = imageUrl.data.url;
+					imageArray.push(imageCreator);
+				});
+			})
+			.catch((err) => {
+				console.log('Error!', err);
+			});
+		rp('https://www.reddit.com/r/memes/new.json?limit=100')
+			.then((body) => {
+				var parsedData = JSON.parse(body);
+				parsedData.data.children.forEach((imageUrl) => {
+					var imageCreator = imageUrl.data.url;
+					imageArray.push(imageCreator);
+				});
+			})
+			.catch((err) => {
+				console.log('Error!', err);
+			});
+		rp('https://www.reddit.com/r/dankmemes/rising.json?limit=100')
+			.then((body) => {
+				var parsedData = JSON.parse(body);
+				parsedData.data.children.forEach((imageUrl) => {
+					var imageCreator = imageUrl.data.url;
+					imageArray.push(imageCreator);
+				});
+			})
+			.catch((err) => {
+				console.log('Error!', err);
+			});
+		rp('https://www.reddit.com/r/dankmemes/top.json?limit=100')
+			.then((body) => {
+				var parsedData = JSON.parse(body);
+				parsedData.data.children.forEach((imageUrl) => {
+					var imageCreator = imageUrl.data.url;
+					imageArray.push(imageCreator);
+				});
+			})
+			.catch((err) => {
+				console.log('Error!', err);
+			});
+		rp('https://www.reddit.com/r/dankmemes/new.json?limit=100')
+			.then((body) => {
+				var parsedData = JSON.parse(body);
+				parsedData.data.children.forEach((imageUrl) => {
+					var imageCreator = imageUrl.data.url;
+					imageArray.push(imageCreator);
+				});
+			})
+			.catch((err) => {
+				console.log('Error!', err);
+			});
+		rp('https://www.reddit.com/r/wholesomememes/rising.json?limit=100')
+			.then((body) => {
+				var parsedData = JSON.parse(body);
+				parsedData.data.children.forEach((imageUrl) => {
+					var imageCreator = imageUrl.data.url;
+					imageArray.push(imageCreator);
+				});
+			})
+			.catch((err) => {
+				console.log('Error!', err);
+			});
+		console.log('Number of Memes: ' + imageArray.length);
+	}
+}, 30000);
 
 function trigger_func() {
 	ranImage = imageArray;
-	console.log('done!');
-	console.log(imageArray.length);
 }
 setTimeout(function() {
 	trigger_func();
@@ -109,7 +121,7 @@ setTimeout(function() {
 // this event will only trigger one time after logging in
 client.once('ready', () => {
 	console.log('Ready!');
-	client.user.setActivity('Minecraft', { type: 'PLAYING' });
+	client.user.setActivity('Joe', { type: 'PLAYING' });
 });
 
 client.on('message', (message) => {
@@ -138,8 +150,13 @@ client.on('message', (message) => {
 	const command = args.shift().toLowerCase();
 
 	if (command === 'meme') {
-		var item = ranImage[Math.floor(Math.random() * ranImage.length)];
-		message.channel.send(item);
+		if (time == timeSet) {
+			message.channel.send('Refreshing memes, try again in one minute!');
+			return;
+		} else {
+			var item = ranImage[Math.floor(Math.random() * ranImage.length)];
+			message.channel.send(item);
+		}
 	} else if (command === 'amazing') {
 		request('https://meme-api.herokuapp.com/gimme/EarthPorn', function(error, response, body) {
 			if (!error) {
