@@ -5,6 +5,21 @@ const request = require('request');
 const { prefix, token } = require('./config.json');
 const rp = require('request-promise');
 
+//Keeps webhosting alive
+const http = require('http');
+const express = require('express');
+const app = express();
+app.get("/", (request, response) => {
+  console.log(Date.now() + " Ping Received");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
+
+
+
 // create a new Discord client
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -17,9 +32,9 @@ for (const file of commandFiles) {
 }
 var imageArray = [];
 var ranImage;
+
 var today = new Date();
 let time;
-let timeSet = '18:35';
 setInterval(function() {
 	today = new Date();
 	time = today.getHours() + ':' + today.getMinutes();
@@ -28,7 +43,7 @@ setInterval(function() {
 }, 30000);
 
 setInterval(function() {
-	if (time == timeSet) {
+	if (time == '24:00') {
 		rp('https://www.reddit.com/r/memes/top.json?limit=100')
 			.then((body) => {
 				var parsedData = JSON.parse(body);
@@ -127,7 +142,7 @@ client.once('ready', () => {
 client.on('message', (message) => {
 	if (message.author.bot) return;
 	//server log
-	var logChannel = client.channels.get('567838697870065664');
+	var logChannel = client.channels.get('721838169258983426');
 	var currentdate = new Date();
 	var datetime =
 		currentdate.getMonth() +
@@ -150,7 +165,7 @@ client.on('message', (message) => {
 	const command = args.shift().toLowerCase();
 
 	if (command === 'meme') {
-		if (time == timeSet) {
+		if (time == '18:26') {
 			message.channel.send('Refreshing memes, try again in one minute!');
 			return;
 		} else {
@@ -265,4 +280,5 @@ client.on('message', (message) => {
 	}
 });
 // login to Discord with your app's token
-client.login(process.env.TOKEN);
+client.login(token);
+
